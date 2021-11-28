@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head th:replace="fragments :: page_head('Booking - Iway')" />
+<body>
+
+<form th:action="@{/appointment/create}" method="post" id="appointmentForm">
+            <input type="hidden" name="id" th:value="${appointment.id}"/>
+<div class="form-group">
+                <label for="location">Выберите город:</label>
+                <select class="form-control" required="required" 
+th:value="${appointment.location}" name="location" id="location">
+                    <option disabled="disabled" selected="selected" > -- 
+выберите город --</option>
+                    <option th:each="city : ${cities}" th:value="${city.id}" 
+th:text="${city.name}" ></option>
+            </select>
+            </div>
+            </form>
+
+            <form th:action="@{/appointment/agency}" method="post" id="appointmentForm">
+            <input type="hidden" name="id" th:value="${appointment.id}"/>
+            <div class="form-group">
+                <label for="location">Выберите агентство:</label>
+                <select class="form-control" th:value="${appointment.agency}" name="agency" id="agency" required="required">
+                    <option disabled="disabled" selected="selected" > -- выберите агентство --</option>
+                    <option th:each="agency : ${agencies}" th:value="${agency.id}" th:text="${agency.name}" ></option>
+
+                </select>
+            </div>
+            </form>
+            <form th:action="@{/appointment/service}" method="post" id="appointmentForm">
+            <input type="hidden" name="id" th:value="${appointment.id}"/>
+            <div class="form-group">
+                <label for="location">Выберите услугу:</label>
+                <select class="form-control" th:value="${appointment.service}" name="service" id="service" required="required">
+                    <option disabled="disabled" selected="selected" > -- выберите услугу --</option>
+                    <option th:each="service : ${services}" th:value="${service.id}" th:text="${service.name}" ></option>
+
+                </select>
+            </div>
+            </form>
+</body>
+</html>

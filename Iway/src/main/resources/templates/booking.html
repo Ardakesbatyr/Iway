@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head th:replace="fragments :: page_head('Booking - Iway')" 
+/>
+<body>
+<div class="container-fluid">
+	<div th:replace="navigation :: menu"></div>
+	<div>
+		<h2>Iway Panel Booking</h2>
+		Welcome 
+		<a th:href="@{/account}" 
+			sec:authentication="principal.fullname"></a>	
+		<span sec:authentication="principal.authorities"></span>		
+	</div>
+	
+	<div class="container">
+
+    <div class="row">
+        <div class="col-md-4 mt-5">
+            <form th:action="@{/orders}" method="post" th:object="${booking}">
+
+                <div class="form-group">
+                    <label for="booking">Choose location</label>
+                    <select id="booking" class="form-control select2-single" th:field="*{location}" required>
+                        <option value="">Search location</option>
+                        
+                    </select>
+                
+                </div>
+                
+                <div class="form-group">
+                    <label for="agency">Choose agency</label>
+                    <select id="agency" class="form-control select2-single" th:field="*{agency}" required>
+                        <option value="">Search agency</option>
+                        
+                    </select>
+                
+                </div>
+                	
+   				
+   				<button class="btn btn-primary" type="submit">Submit form</button>
+            </form>
+        </div>
+    </div>
+
+</div>
+
+   <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+	<script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+	<script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+	<script th:src="@{assets/select2-develop/dist/js/select2.full.js}"></script>
+	
+<script>
+    $("#booking").select2({
+        theme: "bootstrap4",
+        ajax: {
+            url: 'location',
+            dataType: 'json',
+            delay: 250,
+            processResults: function (response) {
+                return {
+                    results: response
+                };
+            },
+            cache: true
+        }
+    });
+    
+    $("#agency").select2({
+        theme: "bootstrap4",
+        ajax: {
+            url: 'agency',
+            dataType: 'json',
+            delay: 250,
+            processResults: function (response) {
+                return {
+                    results: response
+                };
+            },
+            cache: true
+        }
+    });
+  
+</script>
+
+
+
+
+
+	<div th:replace="fragments :: footer"></div>
+	
+</div>
+</body>
+
+
+</html>

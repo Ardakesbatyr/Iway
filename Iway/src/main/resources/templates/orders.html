@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head th:replace="fragments :: page_head('Orders List - Iway')" 
+/>
+<body>
+<div class="container-fluid">
+	<div th:replace="navigation :: menu"></div>
+	
+	<div th:if="${booking.location != null}" class="container">
+	
+	<h2 class="mt-5">
+       	Your location is: <strong th:text="${booking.location.label}" ></strong>
+    </h2>
+    
+    <h2 class="mt-5">
+       	Your agency is: <strong th:text="${booking.agency.label}" ></strong>
+    </h2>
+
+    <a th:href="@{/booking}" class="btn btn-primary">Go back</a>
+	</div>
+	
+	<div th:replace="fragments :: footer"></div>
+	
+</div>
+</body>
+
+
+</html>
